@@ -17,6 +17,8 @@ import utilities.logs.Log;
 import java.io.FileOutputStream;
 import java.time.Duration;
 import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class TestUtility {
 
@@ -102,12 +104,15 @@ public class TestUtility {
        return this;
     }
 
-    public int convertStringBracketValueIntoInteger(String Value){
-        StringBuffer sb = new StringBuffer(Value);
-        sb.replace(0,1," ");
-        sb.replace(3,4," ");
-        int count = Integer.parseInt(sb.toString().trim());
-        return count;
+    public int extractDigits(String Value) {
+        String regex ="[0-9]+";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(Value);
+        StringBuffer sb = new StringBuffer();
+        while (matcher.find()) {
+            sb.append(matcher.group());
+        }
+        return Integer.parseInt(sb.toString());
     }
 
 }

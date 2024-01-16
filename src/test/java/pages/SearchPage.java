@@ -15,7 +15,7 @@ public class SearchPage {
 
     public TestUtility utility = new TestUtility();
 
-    @FindBy(how = How.XPATH,using = "//button[@class='sc-giAqHp eaGTVv']/child::span[text()='Filter']")
+    @FindBy(how = How.XPATH,using = "//button[@class='sc-giAqHp huKghL' or type='button']/child::span[text()='Filter']")
     public WebElement filterButton;
 
     public SearchPage(RemoteWebDriver driver){

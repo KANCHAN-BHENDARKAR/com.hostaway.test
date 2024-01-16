@@ -2,7 +2,6 @@ package pages;
 
 import io.qameta.allure.Step;
 import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
@@ -11,8 +10,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import utilities.TestUtility;
 import utilities.logs.Log;
-
-import java.sql.SQLOutput;
 import java.util.List;
 
 public class AllListingPropertiesPage {
@@ -31,14 +28,12 @@ public class AllListingPropertiesPage {
     @FindBy(how = How.XPATH,using = "//h1[text()='Properties']")
     public WebElement PropertiesLabel;
 
-
-    //div[@class='sc-jffHpj ewTIhF']/child::a[contains(@href,'/listings/')]
     @FindBys({
-            @FindBy( how = How.XPATH,using = "//div[@class='sc-jffHpj ewTIhF']")
+            @FindBy( how = How.XPATH,using = "//a[contains(@href,\"listing\")]")
     })
     public List<WebElement> PropertiesListingCount;
 
-    @FindBy(how = How.XPATH,using = "//span[normalize-space()='(71)']")
+    @FindBy(how = How.XPATH,using = "//span[text()='All']/child::*")
     public WebElement AllLabelCount;
 
     @FindBy(how = How.XPATH,using = "//h3[text()='Cozy Place in Marmaris']")
@@ -60,31 +55,24 @@ public class AllListingPropertiesPage {
     }
 
     @Step("Verify All Listing Properties Results")
-    public AllListingPropertiesPage verifyAllListingPropertiesCount(){
+    public AllListingPropertiesPage verifyAllListingPropertiesCount()  {
 
         // ---- Traverse till the last element piece by piece
         utility.wait(driver,20);
-        int LableValue = utility.convertStringBracketValueIntoInteger(AllLabelCount.getText());
-
-        utility.scrollToSpecificWebElement1(driver,DenmarkAalborgRecord);
-        utility.wait(driver,10);
-        utility.scrollToSpecificWebElement1(driver,AngolaLubangoRecord);
-        utility.wait(driver,10);
-        utility.scrollToSpecificWebElement1(driver,SerbiaRecord);
-        utility.wait(driver,10);
-        utility.scrollToSpecificWebElement1(driver,cozyPlaceInMarmaidLastRecord);
+        int LableValue = utility.extractDigits(AllLabelCount.getText());
+        for (int i = 0; i < LableValue; i+=18) {
+            utility.scrollToBottom(driver);
+            try{Thread.sleep(4000);}catch (Exception e){
+                e.getMessage();}
+        }
 
         int ActualTotalPropertiesListingCount = PropertiesListingCount.size();
         Log.info("Total Properties Listing Count "+ ActualTotalPropertiesListingCount);
 
         //----- Validate the Both Counts ----
-        Assert.assertEquals(ActualTotalPropertiesListingCount,LableValue);
+        //ToDo: We consistently decrease the count of items in the UI locators list by one since
+        // it encompasses the locator for the page name on the All Listing page.
+        Assert.assertEquals((ActualTotalPropertiesListingCount-1),LableValue);
         return this;
     }
-
-
-
-
-
-
 }

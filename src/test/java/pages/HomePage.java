@@ -20,7 +20,7 @@ public class HomePage {
      */
     @FindBy(how = How.XPATH,using = "//div[@class=\"sc-jVSGNQ hzsGOz\"]/button")
     public WebElement searchButton;
-    @FindBy(how = How.XPATH,using = "//a[text()='All listings']")
+    @FindBy(how = How.XPATH,using = "//a[contains(text(),'All listings page')]")
     public WebElement allListingPageButton;
 
     @FindBy(how = How.XPATH,using = "//h1[@class='sc-gKAaRy cMptV'][text()=\"Search flats and houses \"]")
