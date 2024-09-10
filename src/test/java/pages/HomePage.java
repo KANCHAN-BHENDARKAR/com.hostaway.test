@@ -20,7 +20,7 @@ public class HomePage {
      */
     @FindBy(how = How.XPATH,using = "//div[@class=\"sc-jVSGNQ hzsGOz\"]/button")
     public WebElement searchButton;
-    @FindBy(how = How.XPATH,using = "//a[contains(text(),'All listings page')]")
+    @FindBy(how = How.XPATH,using = "(//*[text()='All listings page'])[1]")
     public WebElement allListingPageButton;
 
     @FindBy(how = How.XPATH,using = "//h1[@class='sc-gKAaRy cMptV'][text()=\"Search flats and houses \"]")
@@ -55,8 +55,8 @@ public class HomePage {
     }
 
     public HomePage verifyHomePage(){
-        utility.waitVisibility(driver, searchFlatAndHouseBigTitle);
-        Assert.assertTrue(searchFlatAndHouseBigTitle.isDisplayed() == true);
+        utility.waitVisibility(driver, allListingPageButton);
+        Assert.assertTrue(allListingPageButton.isDisplayed() == true);
         return this;
     }
 

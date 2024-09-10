@@ -27,6 +27,7 @@ public class TestUtility {
     private static Properties prop;
     public WebDriverWait wait;
 
+    /*
     public  RemoteWebDriver openBrowser()
     {
         String browsername = PropertiesFileUtility.getValueFromConfigPropertiesFile("browsername");
@@ -50,6 +51,7 @@ public class TestUtility {
         }
         return(driver);
     }
+     */
 
     public FluentWait<RemoteWebDriver> defineWait(RemoteWebDriver driver) throws Exception
     {

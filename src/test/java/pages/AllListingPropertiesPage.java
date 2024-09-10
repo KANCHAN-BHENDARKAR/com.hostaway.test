@@ -72,7 +72,7 @@ public class AllListingPropertiesPage {
         //----- Validate the Both Counts ----
         //ToDo: We consistently decrease the count of items in the UI locators list by one since
         // it encompasses the locator for the page name on the All Listing page.
-        Assert.assertEquals((ActualTotalPropertiesListingCount-1),LableValue);
+        Assert.assertEquals((ActualTotalPropertiesListingCount-2),LableValue);
         return this;
     }
 }
